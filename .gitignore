@@ -9,4 +9,4 @@ project/*
 .vscode/*
 !.vscode/c_cpp_properties.json
 
-!license.txt
+!LICENSE
