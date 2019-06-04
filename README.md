@@ -29,6 +29,12 @@ int, double, float型に対応していますので，オブジェクトを作�
 
 # Usage
 
+You only have to put cppcsv.hpp in your project directory and set the include path for your compiler.
+
+```cpp
+#include "cppcsv.hpp"
+```
+
 ## Instanciate and load a CSV file
 
 ```cpp
