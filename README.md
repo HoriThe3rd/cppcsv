@@ -1,4 +1,4 @@
-CSV parser for C++
+CSV loader for C++
 ====
 
 # Overview
