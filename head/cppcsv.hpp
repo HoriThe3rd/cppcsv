@@ -5,6 +5,8 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include "Eigen/Core"
+#include "Eigen/Geometry"
 
 using namespace std;
 
@@ -17,6 +19,7 @@ class csv{
         const int get_rowsize() const;
         const int get_colsize() const;
         T operator()(const int row, const int col) const;
+        const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> get_asEigen() const;
 
     private:
         vector<vector<T>> data;
@@ -86,13 +89,14 @@ void csv<T>::show()const{
     }
 }
 
-// Getters
+// ==== Getters ====
 template <class T>
 const int csv<T>::get_rowsize() const{ return row_size; }
 
 template <class T>
 const int csv<T>::get_colsize() const{ return col_size; }
 
+// You can access each elements of the csv by obj(row, col).
 template <class T>
 T csv<T>::operator()(const int row, const int col) const{
     if(!has_data){
@@ -101,6 +105,28 @@ T csv<T>::operator()(const int row, const int col) const{
     }
     return data[row][col];
 }
+
+// You can get all elements of the csv as Eigen matrix format.
+template <class T>
+const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> csv<T>::get_asEigen() const{
+    // Confirm the existence of the data.
+    if(!has_data){
+        cout << "csv object doesn't have a data" << endl;
+        exit(0);
+    }
+    // Initialize an Eigen matrix.
+    Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> mat = Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>::Zero(row_size, col_size);
+
+    // Copy the data to the Eigen matrix from the STL vector.
+    for(int i=0; i<row_size; i++){
+        for(int j=0; j<col_size; j++){
+            mat(i, j) = data[i][j];
+        }
+    }
+    return mat;
+}
+
+// ======== Private functions ==========
 
 // String to number converters.
 template <class T>

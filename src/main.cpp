@@ -9,13 +9,9 @@ int main(void){
     w.load("test_w.csv", 5, 10);
     w.show();
 
+    Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> mat = w.get_asEigen();
     cout << "-----" << endl;
-    for(int i=0; i<5; i++){
-        for(int j=0; j<10; j++){
-            cout << w(i,j) << " ";
-        }
-        cout << endl;
-    }
+    cout << mat << endl;
 
     cout << "Finish" << endl;
 }
