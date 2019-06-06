@@ -5,13 +5,7 @@
 #include "cppcsv.hpp"
 
 int main(void){
-    csv<int> w;
+    csv<char> w;
     w.load("test_w.csv", 5, 10);
     w.show();
-
-    cout << "-------" << endl;
-    csv<int> w2("test_w.csv", 5, 10);
-    w2.show();
-
-    cout << "Finish" << endl;
 }

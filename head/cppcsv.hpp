@@ -49,10 +49,7 @@ template <class T>
 bool csv<T>::load(const string& fileName, const int rows, const int cols){
     // Open a csv file.
     ifstream file(fileName);
-    if(!file){
-        cout << "csv object can't open a file." << endl;
-        return false;
-    }
+    if(!file) throw runtime_error("csv object can't open a file.");
 
     // Save parameters
     row_size = rows;
@@ -84,10 +81,8 @@ bool csv<T>::load(const string& fileName, const int rows, const int cols){
 template <class T>
 void csv<T>::show()const{
     // Check the access to the data without loading csv.
-    if(!has_data){
-        cout << "csv object doesn't have a data." << endl;
-        exit(0);
-    }
+    if(!has_data) throw runtime_error("csv object doesn't have a data.");
+
     // Display data
     for(int row_cnt=0; row_cnt<row_size; row_cnt++){
         for(int col_cnt=0; col_cnt<col_size; col_cnt++){
@@ -105,23 +100,19 @@ template <class T>
 const int csv<T>::get_colsize() const{ return col_size; }
 
 // You can access each elements of the csv by obj(row, col).
+// "at" method can throw an exception when invalid row and col.
 template <class T>
 T csv<T>::operator()(const int row, const int col) const{
-    if(!has_data){
-        cout << "csv object doesn't have a data." << endl;
-        exit(0);
-    }
-    return data[row][col];
+    if(!has_data) throw runtime_error("csv object doesn't have a data.");
+    return data.at(row).at(col);
 }
 
 // You can get all elements of the csv as Eigen matrix format.
 template <class T>
 const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> csv<T>::get_asEigen() const{
     // Confirm the existence of the data.
-    if(!has_data){
-        cout << "csv object doesn't have a data" << endl;
-        exit(0);
-    }
+    if(!has_data) throw runtime_error("csv object doesn't have a data.");
+
     // Initialize an Eigen matrix.
     Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> mat = Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic>::Zero(row_size, col_size);
 
@@ -139,8 +130,7 @@ const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> csv<T>::get_asEigen() con
 // String to number converters.
 template <class T>
 inline T csv<T>::stonum(const string str){
-    cout << "csv object: You choose invalid argument type. I can read int, double, and float type only." << endl;
-    exit(0);
+    throw invalid_argument("csv object: You choose invalid argument type. I can read int, double, and float type only.");
 }
 
 template <>
