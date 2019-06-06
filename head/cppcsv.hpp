@@ -131,6 +131,12 @@ const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> csv<T>::get_asEigen() con
 // String to number converters.
 template <class T>
 inline T csv<T>::stonum(const string str){
+    cout << "csv object: You choose invalid argument type. I can read int, double, and float type only." << endl;
+    exit(0);
+}
+
+template <>
+inline int csv<int>::stonum(const string str){
     return stoi(str);
 }
 
