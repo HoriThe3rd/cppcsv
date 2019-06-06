@@ -5,6 +5,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <stdexcept>
 #include "Eigen/Core"
 #include "Eigen/Geometry"
 
@@ -14,6 +15,7 @@ template <class T>
 class csv{
     public:
         csv();
+        csv(const string& fileName, const int rows, const int cols);
         bool load(const string& fileName, const int rows, const int cols);
         void show() const;
         const int get_rowsize() const;
@@ -33,6 +35,12 @@ template <class T>
 csv<T>::csv():
     has_data(false) {
     cout << "csv object is created." << endl;
+}
+
+template <class T>
+csv<T>::csv(const string& fileName, const int rows, const int cols):
+    has_data(false) {
+    load(fileName, rows, cols);
 }
 
 // Load a csv file and store the data to STL vector.
