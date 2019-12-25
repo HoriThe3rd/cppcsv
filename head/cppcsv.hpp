@@ -22,6 +22,8 @@ class csv{
         const int get_colsize() const;
         T operator()(const int row, const int col) const;
         const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> get_asEigen() const;
+		vector<T> get_asVector1d() const;	//dev.
+		vector<vector<T>> get_asVector2d() const; //dev.
 
     private:
         vector<vector<T>> data;
@@ -123,6 +125,19 @@ const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> csv<T>::get_asEigen() con
         }
     }
     return mat;
+}
+
+// Return data as 1 dimension std::vector.
+template <class T>
+vector<T> csv<T>::get_asVector1d() const{
+	// dev!!!
+	
+}
+
+// Return data as 2 dimension std::vector.
+template <class T>
+vector<vector<T>> csv<T>::get_asVector2d() const{
+	return data;
 }
 
 // ======== Private functions ==========
