@@ -61,3 +61,11 @@ You can also acces the data as Eigen matrix.
 ```cpp
 Eigen::Matrix<int, Eigen::Dynamic, Eigen::Dynamic> mat = data.get_asEigen();
 ```
+
+Get data as an std::vector.
+```cpp
+// Get data as a one dimension std::vector.
+vector<int> v = data.get_asVector1d();
+// Get data as a two dimension std::vector.
+vector<vector<int>> v2 = data.get_asVector2d();
+```
