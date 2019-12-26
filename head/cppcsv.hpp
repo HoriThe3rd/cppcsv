@@ -131,7 +131,13 @@ const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> csv<T>::get_asEigen() con
 template <class T>
 vector<T> csv<T>::get_asVector1d() const{
 	// dev!!!
-	
+	vector<T> v;
+    for(int r=0; r<row_size; r++){
+        for(int c=0; c<col_size; c++){
+            v.push_back(data[r][c]);
+        }
+    }
+    return v;
 }
 
 // Return data as 2 dimension std::vector.
@@ -149,7 +155,7 @@ inline T csv<T>::stonum(const string str){
 }
 
 template <>
-inline int csv<int>::stonum(const string str){
+inline int csv<int>::stonum(string str){
     return stoi(str);
 }
 

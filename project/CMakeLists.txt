@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 file(GLOB common_src ../../common_objects/src/*.cpp)
 file(GLOB my_src ../src/*.cpp)
 # インクルードパスの設定
-include_directories(./eigen337)
+include_directories(./eigen)
 #include_directories(../../common_objects/lib/cereal-1.2.2/include)
 include_directories(../head)
 # コンパイラへのオプション
