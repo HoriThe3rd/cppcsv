@@ -9,16 +9,11 @@
 using namespace std;
 
 int main(void){
-    csv<int> w;
-    w.load("test2.csv", 3, 5);
-    
-    vector<vector<int>> v2;
-    v2 = w.get_asVector2d();
+    cout << "start." << endl;
 
-    for(int i=0; i<3; i++){
-        for(int j=0; j<5; j++){
-            cout << v2[i][j] << ", ";
-        }
-        cout << endl;
-    }
+    csv<int> w;
+    w.load("test.csv", 3, 4);
+    w.show();
+    
+    cout << "done." << endl;
 }

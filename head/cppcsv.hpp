@@ -85,24 +85,19 @@ void csv<T>::show()const{
     // Check the access to the data without loading csv.
     if(!has_data) throw runtime_error("csv object doesn't have a data.");
 
-    // Display data
-/*    for(int row_cnt=0; row_cnt<row_size; row_cnt++){
-        for(int col_cnt=0; col_cnt<col_size; col_cnt++){
-            cout << data[row_cnt][col_cnt] << " ";
-        }
-        cout << endl;
-    }
-*/	
 	// Python like display
 	cout << "[";
 	for(int row_cnt=0; row_cnt<row_size; row_cnt++){
+        if(row_cnt!=0) cout << " ";
 		cout << "[";
 		for(int col_cnt=0; col_cnt<col_size; col_cnt++){
 			cout << data[row_cnt][col_cnt];
-			if(col_cnt<col_size-1) cout << ", ";
+			if(col_cnt<col_size-1) cout << ",\t";
 		}
-		cout << "]" << endl;
+		cout << "]";
+        if(row_cnt<row_size-1) cout << ", " << endl;
 	}
+    cout << "]" << endl;
 }
 
 // ==== Getters ====

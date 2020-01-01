@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
+project(cppcsv)
 # コンパイルに必要なソースコードを取得
 file(GLOB common_src ../../common_objects/src/*.cpp)
 file(GLOB my_src ../src/*.cpp)
