@@ -86,12 +86,23 @@ void csv<T>::show()const{
     if(!has_data) throw runtime_error("csv object doesn't have a data.");
 
     // Display data
-    for(int row_cnt=0; row_cnt<row_size; row_cnt++){
+/*    for(int row_cnt=0; row_cnt<row_size; row_cnt++){
         for(int col_cnt=0; col_cnt<col_size; col_cnt++){
             cout << data[row_cnt][col_cnt] << " ";
         }
         cout << endl;
     }
+*/	
+	// Python like display
+	cout << "[";
+	for(int row_cnt=0; row_cnt<row_size; row_cnt++){
+		cout << "[";
+		for(int col_cnt=0; col_cnt<col_size; col_cnt++){
+			cout << data[row_cnt][col_cnt];
+			if(col_cnt<col_size-1) cout << ", ";
+		}
+		cout << "]" << endl;
+	}
 }
 
 // ==== Getters ====
