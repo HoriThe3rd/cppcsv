@@ -21,9 +21,11 @@ class csv{
         const int get_rowsize() const;
         const int get_colsize() const;
         T operator()(const int row, const int col) const;
+        void from_eigen(Eigen::MatrixXd);   // dev.
+        void from_eigen(Eigen::MatrixXf);   // dev.
         const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> get_asEigen() const;
-		vector<T> get_asVector1d() const;	//dev.
-		vector<vector<T>> get_asVector2d() const; //dev.
+		vector<T> get_asVector1d() const;
+		vector<vector<T>> get_asVector2d() const;
 
     private:
         vector<vector<T>> data;
