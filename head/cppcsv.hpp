@@ -21,8 +21,7 @@ class csv{
         const int get_rowsize() const;
         const int get_colsize() const;
         T operator()(const int row, const int col) const;
-        void from_eigen(Eigen::MatrixXd);   // dev.
-        void from_eigen(Eigen::MatrixXf);   // dev.
+        void set_from_eigen(Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> em);   // dev.
         const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> get_asEigen() const;
 		vector<T> get_asVector1d() const;
 		vector<vector<T>> get_asVector2d() const;
@@ -100,6 +99,27 @@ void csv<T>::show()const{
         if(row_cnt<row_size-1) cout << ", " << endl;
 	}
     cout << "]" << endl;
+}
+
+// ======== Setters ==========
+template<class T>
+void csv<T>::set_from_eigen(Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> em){
+    has_data = true;
+    if(data.empty()==false) data.clear();
+    // Resize the data container if the source matrix size is not same as the container.
+    if(em.rows()!=row_size || em.cols()!=col_size){
+        data.resize(em.rows());
+        for (int i=0; i<em.rows(); i++){
+            data[i].resize(em.cols());
+        }
+    }
+
+    // Move the values from the source matrix to the destination container.
+    for(int i=0; i<em.rows(); i++){
+        for(int j=0; j<em.cols(); j++){
+            data[i][j] = em(i, j);
+        }
+    }
 }
 
 // ==== Getters ====
