@@ -37,7 +37,6 @@ class csv{
 template <class T>
 csv<T>::csv():
     has_data(false) {
-    cout << "csv object is created." << endl;
 }
 
 template <class T>
