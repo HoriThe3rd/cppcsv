@@ -1,6 +1,11 @@
 CSV loader for C++
 ====
 
+# Important
+
+This repository is discontinued and will be removed.
+It is moved to [here[(https://github.com/HoriThe3rd/cpp_tools).
+
 # Overview
 This is a C++ CSV file parser for numerical data.
 
