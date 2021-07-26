@@ -49,8 +49,9 @@ You only have to put cppcsv.hpp in your project directory and set the include pa
 csv<int> data;
 
 // Load a CSV file.
-// You have to define row size and column size of the data
+// You shouldn't set data sizes. But in this case, the loading may take long time.
 data.load("test_w.csv", 5, 10);
+data.load("test_w.csv");
 ```
 
 ## Access the data
