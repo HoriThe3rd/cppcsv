@@ -1,33 +1,38 @@
 CSV loader for C++
 ====
 
-# Important
+## 概要
+C++でCSVファイルを読み込むためのクラスです．Eigenは必要ですが，headerファイルを読み込むだけで使用できます．数値の並んだCSVファイルを読み込み，std::vectorやEigenで扱えるようにするために作りました．
 
-This repository is discontinued and will be removed.
-It is moved to [here[(https://github.com/HoriThe3rd/cpp_tools).
+**扱える型**
+- int
+- float
+- double
 
-# Overview
-This is a C++ CSV file parser for numerical data.
+読み込んだデータへの取得方法は以下の通りです．
+- 行と列の番号で単一の要素を取得
+- std::vectorの2次元配列として取得
+- Eigenの行列として取得
 
-You can access the CSV file as an Eigen matrix object.
+## 今後
+必要に応じてアップデートしていきます．IssueやPull Requestなど歓迎です．
 
-This class is compatible with int, double, and flowt type data.
+## メソッド
+| メソッド | 説明 |
+| --- | ---|
+| csv() | コンストラクタ |
+| csv(const string& fileName) | コンストラクタで読み込みファイル指定 |
+| load(const string& fileName) | CSVファイル読み込み |
+| show() | 読み込んだものを表示 |
+| get_rowsize() | 行数を取得 |
+| get_colsize() | 列数を取得 |
+| operator()(const int row, const int col) | 行番号，列番号を指定して値を取得 |
+| get_asEigen() | Eigen::Matrixでデータ全てを取得 |
+| get_asVector1d() | 1次元std::vectorとしてデータ全てを取得 |
+| get_asVector2d() | 2次元std::vectorとしてデータ全てを取得 |
 
-I will continue to update this class to be more convinience, e.g. file exporting. Please feel free to pull request if you want to add new features.
-
-## Japanese
-
-C++でCSVファイルを読み込むためのクラスを作成しました．
-
-カンマで区切られたCSVファイルのみ対応しています．タブはダメです．
-
-int, double, float型に対応していますので，オブジェクトを作成するときに，指定してください．他の型は未定義です，このクラスは，計算結果や計算用のパラメータを読み込んだりするために作ったので，文字データに対応する予定は今の所ありません，悪しからず．
-
-読み込んだデータは，要素一つずつアクセスすることもできますし，Eigenの行列として取り出すこともできます．
-
-読み込みだけではなく，ファイルの書きだしなど，もっと便利になるようにアップデートしていけたらと思います．プルリクエストなどはお気軽にどうぞ（むしろお願いします）．
-
-なお，このクラスを用いたことにより発生した問題などの責任は一切とりませんので，自己責任でお願いいたします．
+## お断り
+全てを完全にテストしているわけではありませんので，バグなどあるかもしれません．その時はぜひissueお願いします．
 
 # Requirements
 - Eigen: C++ linear algebra library
@@ -50,7 +55,6 @@ csv<int> data;
 
 // Load a CSV file.
 // You shouldn't set data sizes. But in this case, the loading may take long time.
-data.load("test_w.csv", 5, 10);
 data.load("test_w.csv");
 ```
 
