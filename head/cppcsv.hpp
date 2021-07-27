@@ -16,8 +16,7 @@ template <class T>
 class csv {
    public:
     csv();
-    csv(const string& fileName, const int rows, const int cols);
-    bool load(const string& fileName, const int rows, const int cols);
+    csv(const string& fileName);
     bool load(const string& fileName);
     void show() const;
     const int get_rowsize() const;
@@ -41,51 +40,15 @@ template <class T>
 csv<T>::csv() : has_data(false) {}
 
 template <class T>
-csv<T>::csv(const string& fileName, const int rows, const int cols)
-    : has_data(false) {
-    load(fileName, rows, cols);
-}
-
-// Load a csv file and store the data to STL vector.
-// If the loading fails, this function returns "false".
-template <class T>
-bool csv<T>::load(const string& fileName, const int rows, const int cols) {
-    // Open a csv file.
-    ifstream file(fileName);
-    if (!file) throw runtime_error("csv object can't open a file.");
-
-    // Save parameters
-    row_size = rows;
-    col_size = cols;
-
-    // Initialize the data container.
-    data.resize(rows);
-    for (int i = 0; i < rows; i++) {
-        data[i].resize(cols);
-    }
-
-    // Load the file.
-    int row_num = 0;
-    string loaded_str;
-    while (getline(file, loaded_str)) {
-        int col_num = 0;
-        string tmp;
-        istringstream sstream(loaded_str);
-        while (getline(sstream, tmp, ',')) {
-            data[row_num][col_num] = stonum(tmp);
-            col_num++;
-        }
-        row_num++;
-    }
-    has_data = true;
-    return true;
+csv<T>::csv(const string& fileName) : has_data(false) {
+    load(fileName);
 }
 
 // Load a csv file without the row size and col size.
 template <class T>
 bool csv<T>::load(const string& fileName) {
     ifstream file(fileName);
-    if (!file) throw runtime_error("csv object can't open a file.");
+    if (file.fail()) throw runtime_error("csv object can't open a file.");
 
     // Buffers
     string str_buf, elm;
@@ -97,6 +60,7 @@ bool csv<T>::load(const string& fileName) {
             line_buf.push_back(stonum(elm));
         }
         data.push_back(line_buf);
+        line_buf.clear();
     }
     // Set data size parameters.
     row_size = data.size();
