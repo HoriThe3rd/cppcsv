@@ -33,14 +33,13 @@ class csv {
     int row_size;
     int col_size;
     T stonum(const string str);
-    bool has_data;
 };
 
 template <class T>
-csv<T>::csv() : has_data(false) {}
+csv<T>::csv() {}
 
 template <class T>
-csv<T>::csv(const string& fileName) : has_data(false) {
+csv<T>::csv(const string& fileName) {
     load(fileName);
 }
 
@@ -65,14 +64,13 @@ bool csv<T>::load(const string& fileName) {
     // Set data size parameters.
     row_size = data.size();
     col_size = data[0].size();
-    has_data = true;
     return true;
 }
 
 template <class T>
 void csv<T>::show() const {
     // Check the access to the data without loading csv.
-    if (!has_data) throw runtime_error("csv object doesn't have a data.");
+    if (data.empty()) throw runtime_error("csv object doesn't have a data.");
 
     // Python like display
     cout << "[";
@@ -93,7 +91,6 @@ void csv<T>::show() const {
 template <class T>
 void csv<T>::set_from_eigen(
     Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> em) {
-    has_data = true;
     if (data.empty() == false) data.clear();
     // Resize the data container if the source matrix size is not same as the
     // container.
@@ -127,7 +124,7 @@ const int csv<T>::get_colsize() const {
 // "at" method can throw an exception when invalid row and col.
 template <class T>
 T csv<T>::operator()(const int row, const int col) const {
-    if (!has_data) throw runtime_error("csv object doesn't have a data.");
+    if (data.empty()) throw runtime_error("csv object doesn't have a data.");
     return data.at(row).at(col);
 }
 
@@ -136,7 +133,7 @@ template <class T>
 const Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> csv<T>::get_asEigen()
     const {
     // Confirm the existence of the data.
-    if (!has_data) throw runtime_error("csv object doesn't have a data.");
+    if (data.empty()) throw runtime_error("csv object doesn't have a data.");
 
     // Initialize an Eigen matrix.
     Eigen::Matrix<T, Eigen::Dynamic, Eigen::Dynamic> mat =
