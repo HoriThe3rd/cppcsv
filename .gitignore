@@ -17,3 +17,4 @@ eigen-3.3.9
 
 # test file
 *.csv
+!test.csv
